@@ -1,6 +1,6 @@
-# PW-Final-Project
+# playwright-final-project
 
-Student Kushnir
+Final project for YAJSC automation course using Playwright
 
 ## Requirements
 
@@ -9,30 +9,41 @@ Student Kushnir
 * VSCode
 
 ## Setup
+
+#### 1. Clone the repository
 ```bash
 git clone
+```
 
+#### 2. Install dependencies
 ```bash
 npm install
 ```
 
+#### 3. Install chromium browser
 ```bash
 npx playwright install chromium --with-deps
 ```
 
+#### 4. Create .env file based on .env-example file and add your creds
 ```bash
-npm run test-0
-```
-## Create .env file based on .env-example
-```bash
+# .env-example
 WEB_URL='https://practicesoftwaretesting.com'
-USER_EMAIL='customer@practicesoftwaretesting.com'
-USER_PASSWORD='welcome01'
-USER_NAME='Jane Doe'
+USER_EMAIL='your_email_value'
+USER_PASSWORD='your_password_value'
+USER_NAME='your_username_value'
 ```
-## Run test
+
+#### 5. OPTIONAL: Add GitHub Actions Secrets and Variables
+```bash
+# .github / workflows / playwright.yml
+WEB_URL: ${{vars.WEB_URL}}
+USER_EMAIL: ${{secrets.USER_EMAIL}}
+USER_PASSWORD: ${{secrets.USER_PASSWORD}}
+USER_NAME: ${{vars.USER_NAME}}
+```
+
+#### 6. Run tests
 ```bash
 npx playwright test
 ```
-
-
