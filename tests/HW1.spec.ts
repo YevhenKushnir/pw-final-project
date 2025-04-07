@@ -1,4 +1,6 @@
 import { expect, test } from '@playwright/test';
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 test('Test 1: Verify login with valid credentials', async ({ page }) => {
 
@@ -18,7 +20,7 @@ test('Test 1: Verify login with valid credentials', async ({ page }) => {
 test('Test 2: Verify user can view product details', async ({ page }) => {
 
     await page.goto(process.env.WEB_URL!);
-    await page.locator('[data-test="product-01JR5X9HFPE2NNTNHPD9CB4PAR"]').click();
+    await page.getByText('Combination Pliers').click();
     await expect(page.url()).toContain(`${process.env.WEB_URL}/product`);
     await expect(page.locator('[data-test="product-name"]')).toHaveText('Combination Pliers');
     await expect(page.locator('[data-test="unit-price"]')).toHaveText('14.15');
@@ -30,7 +32,7 @@ test('Test 2: Verify user can view product details', async ({ page }) => {
   test('Test 3: Verify user can add product to cart', async ({ page }) => {
 
     await page.goto(process.env.WEB_URL!);
-    await page.locator('[data-test="product-01JR5X9HFW34R5EZ9D2SZ1H1GR"]').click();
+    await page.getByText('Slip Joint Pliers').click();
     await expect(page.url()).toContain(`${process.env.WEB_URL}/product`);
     await expect(page.locator('[data-test="product-name"]')).toHaveText('Slip Joint Pliers');
     await expect(page.locator('[data-test="unit-price"]')).toHaveText('9.17');
