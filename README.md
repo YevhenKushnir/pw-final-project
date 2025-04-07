@@ -12,7 +12,7 @@ Final project for YAJSC automation course using Playwright
 
 #### 1. Clone the repository
 ```bash
-git clone
+git clone https://github.com/YevhenKushnir/pw-final-project.git
 ```
 
 #### 2. Install dependencies
