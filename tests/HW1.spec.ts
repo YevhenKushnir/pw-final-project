@@ -4,16 +4,17 @@ import { LoginPage } from '../pages/login.page';
 import { HomePage } from '../pages/home.page';
 import { ProductPage } from '../pages/product.page';
 import { HeaderFragment } from '../fragments/HeaderFragments';
+import { config } from '../env.config';
 dotenv.config();
 
 test('Test 1: Verify login with valid credentials', async ({ page }) => {
 
   const loginPage = new LoginPage(page);
   await page.goto('/auth/login');
-  await loginPage.login(process.env.USER_EMAIL!, process.env.USER_PASSWORD!);
+  await loginPage.login(config.USER_EMAIL!, config.USER_PASSWORD!);
   await expect(page).toHaveURL('/account');
-  await expect(page.locator('[data-test="page-title"]'), 'My account').toBeVisible();
-  await expect(page.locator('[data-test="nav-menu"]')).toHaveText(process.env.USER_NAME!);
+  await expect(page.getByTestId('page-title')).toBeVisible();
+  await expect(page.getByTestId('nav-menu')).toHaveText(process.env.USER_NAME!);
 });
 
 
@@ -35,7 +36,6 @@ test('Test 3: Verify user can add product to cart', async ({ page }) => {
 
   const homePage = new HomePage(page);
   const productPage = new ProductPage(page);
-  const header = new HeaderFragment(page);
   const productName = 'Slip Joint Pliers';
   const productPrice = '9.17';
 
@@ -53,7 +53,7 @@ test('Test 3: Verify user can add product to cart', async ({ page }) => {
 
   await productPage.header.proceedToCheckout();
   await expect(page).toHaveURL('/checkout');
-  await expect(page.locator('[data-test="product-quantity"]')).toHaveCount(1);
-  await expect(page.locator('[data-test="product-title"]')).toHaveText(productName);
-  await expect(page.locator('[data-test="proceed-1"]'), 'Proceed to checkout').toBeVisible();
+  await expect(page.getByTestId('product-quantity')).toHaveCount(1);
+  await expect(page.getByTestId('product-title')).toHaveText(productName);
+  await expect(page.getByTestId('proceed-1')).toBeVisible();
 });

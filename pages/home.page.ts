@@ -5,7 +5,6 @@ import { ProductsFiltersFragment } from "../fragments/ProductFilterFragments";
 export class HomePage {
     page: Page;
     header: HeaderFragment;
-    searchLocator: Locator;
     filtration: ProductsFiltersFragment;
     productName: Locator;
     productPrice: Locator;
@@ -14,13 +13,12 @@ export class HomePage {
         this.page = page;
         this.header = new HeaderFragment(page);
         this.filtration = new ProductsFiltersFragment(page);
-        this.searchLocator = this.page.getByPlaceholder('Search');
-        this.productName = page.locator('[data-test="product-name"]');
-        this.productPrice = page.locator('[data-test="product-price"]');
+        this.productName = page.getByTestId('product-name');
+        this.productPrice = page.getByTestId('product-price');
     }
 
     async homePageNavigate(): Promise<void> {
-        await this.page.goto(process.env.WEB_URL!);
+        await this.page.goto('/');
     }
 
     async openProduct(productName: string): Promise<void> {
@@ -28,10 +26,10 @@ export class HomePage {
     }
     async getAllProductNames(): Promise<string[]> {
         const names = await this.productName.allTextContents();
-        return names.filter(name => typeof name === 'string').map(name => name.trim());
+        return names.map(name => name.trim());
     }
-      async getAllProductPrices(): Promise<string[]> {
+    async getAllProductPrices(): Promise<string[]> {
         return this.productPrice.allTextContents();
-      }
+    }
 
 }

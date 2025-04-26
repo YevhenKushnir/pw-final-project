@@ -6,7 +6,7 @@ export class HeaderFragment {
 
     constructor(page: Page) {
         this.page = page;
-        this.cartIcon = page.locator('[data-test="nav-cart"]');
+        this.cartIcon = page.getByTestId('nav-cart');
     }
 
     async proceedToCheckout(): Promise<void> {

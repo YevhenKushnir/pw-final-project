@@ -4,9 +4,8 @@ import { HomePage } from '../pages/home.page';
 
 test('Verify sorting by Price (Low - High)', async ({ page }) => {
   const homePage = new HomePage(page);
-  const filters = new ProductsFiltersFragment(page);
   await homePage.homePageNavigate();
-  await filters.selectSortingOption('Price (Low - High)');
+  await homePage.filtration.selectSortingOption('Price (Low - High)');
   const productPrices = await homePage.getAllProductPrices();
   const isSorted = productPrices.every((price, index, array) => {
     if (index === 0) return true;
@@ -22,9 +21,8 @@ test('Verify sorting by Price (Low - High)', async ({ page }) => {
 
 test('Verify sorting by Price (High - Low)', async ({ page }) => {
   const homePage = new HomePage(page);
-  const filters = new ProductsFiltersFragment(page);
   await homePage.homePageNavigate();
-  await filters.selectSortingOption('Price (High - Low)');
+  await homePage.filtration.selectSortingOption('Price (High - Low)');
   const productPrices = await homePage.getAllProductPrices();
   const isSorted = productPrices.every((price, index, array) => {
     if (index === 0) return true;

@@ -4,9 +4,8 @@ import { HomePage } from '../pages/home.page';
 
 test('Verify sorting by Name (A - Z)', async ({ page }) => {
   const homePage = new HomePage(page);
-  const filters = new ProductsFiltersFragment(page);
   await homePage.homePageNavigate();
-  await filters.selectSortingOption('Name (A - Z)');
+  await homePage.filtration.selectSortingOption('Name (A - Z)');
   const productNames = await homePage.getAllProductNames();
   let sortedCorrectly = true;
   for (let i = 1; i < productNames.length; i++) {
@@ -20,9 +19,8 @@ test('Verify sorting by Name (A - Z)', async ({ page }) => {
 
 test('Verify sorting by Name (Z - A)', async ({ page }) => {
   const homePage = new HomePage(page);
-  const filters = new ProductsFiltersFragment(page);
   await homePage.homePageNavigate();
-  await filters.selectSortingOption('Name (Z - A)');
+  await homePage.filtration.selectSortingOption('Name (Z - A)');
   const productNames = await homePage.getAllProductNames();
   let sortedCorrectly = true;
   for (let i = 1; i < productNames.length; i++) {

@@ -14,7 +14,7 @@ export class ProductPage {
 
     constructor(page: Page) {
         this.page = page;
-        this.productName = this.page.locator('[data-test="product-name"]');
+        this.productName = page.getByTestId('product-name');
         this.productPrice = this.page.getByLabel('unit-price');
         this.addToCartButton = this.page.locator('#btn-add-to-cart');
         this.addToFavoritesButton = this.page.getByRole('button', { name: ' Add to favourites ' });
@@ -26,9 +26,6 @@ export class ProductPage {
     }
 
     async addToCart(): Promise<void> {
-        await this.addToCartButton.waitFor({ state: 'visible', timeout: 5000 });
-        await expect(this.addToCartButton).toBeVisible();
         await this.addToCartButton.click();
     }
-
 }
