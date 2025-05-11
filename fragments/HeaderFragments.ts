@@ -1,4 +1,4 @@
-import { Page, Locator, expect } from '@playwright/test';
+import { Page, Locator } from '@playwright/test';
 
 export class HeaderFragment {
     readonly page: Page;
@@ -10,6 +10,7 @@ export class HeaderFragment {
     }
 
     async proceedToCheckout(): Promise<void> {
+        await this.cartIcon.waitFor({ state: 'visible'});
         await this.cartIcon.click();
     }
 

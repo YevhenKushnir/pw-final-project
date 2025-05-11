@@ -1,4 +1,4 @@
-import { expect, Locator, Page } from "@playwright/test";
+import { Locator, Page } from "@playwright/test";
 import { HeaderFragment } from "../fragments/HeaderFragments";
 
 export class ProductPage {
@@ -16,7 +16,7 @@ export class ProductPage {
         this.page = page;
         this.productName = page.getByTestId('product-name');
         this.productPrice = this.page.getByLabel('unit-price');
-        this.addToCartButton = this.page.locator('#btn-add-to-cart');
+        this.addToCartButton = page.getByTestId('add-to-cart');
         this.addToFavoritesButton = this.page.getByRole('button', { name: ' Add to favourites ' });
         this.productAlert = this.page.getByRole('alert', { name: 'Product added to shopping cart.' });
         this.cartQuantity = this.page.locator('#lblCartCount');

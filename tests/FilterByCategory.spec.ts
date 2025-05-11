@@ -1,10 +1,7 @@
-import { test, expect } from '@playwright/test';
-import { HomePage } from '../pages/home.page';
-import { ProductsFiltersFragment } from '../fragments/ProductFilterFragments'; 
-import { CATEGORIES, POWER_TOOLS } from '../pages/category_enum';
+import {expect, test} from '../fixtures/fixtures';
+import { POWER_TOOLS } from '../pages/category_enum';
 
-test('Verify user can filter products by category', async ({ page }) => {
-    const homePage = new HomePage(page);
+test('Verify user can filter products by category', async ({ homePage, page }) => {
     await homePage.homePageNavigate();
     const responsePromise = page.waitForResponse((response) => 
         response.url().includes('/products?between=price,1,100&by_category=') && response.status() === 200
