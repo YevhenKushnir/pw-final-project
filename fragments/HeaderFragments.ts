@@ -10,7 +10,6 @@ export class HeaderFragment {
     }
 
     async proceedToCheckout(): Promise<void> {
-        await this.cartIcon.waitFor({ state: 'visible'});
         await this.cartIcon.click();
     }
 

@@ -2,6 +2,7 @@ import {expect, test} from '../fixtures/fixtures';
 import {LoginPage} from '../pages/login.page';
 import * as dotenv from 'dotenv';
 import { config } from '../env.config';
+import { getExpiryDate } from '../dateUtils';
 dotenv.config();
 
 test('Verify successful checkout with logged in user', async ({ loggedInPage, productPage, cartPage, checkoutPage }) => {
@@ -27,14 +28,7 @@ test('Verify successful checkout with logged in user', async ({ loggedInPage, pr
   await loginPageOnCheckout.login(config.USER_EMAIL!, config.USER_PASSWORD!);
 
   await checkoutPage.expectUserIsLoggedIn();
-
-  const currentDate = new Date();
-  const currentMonth = currentDate.getMonth() + 1;
-  const currentYear = currentDate.getFullYear();
-  const expiryMonth = (currentMonth + 3) % 12 === 0 ? 12 : (currentMonth + 3) % 12;
-  const expiryYear = currentYear + Math.floor((currentMonth + 3 - 1) / 12);
-  const formattedExpiry = `${String(expiryMonth).padStart(2, '0')}/${String(expiryYear)}`;
-
+  const expiryDate = getExpiryDate();
 
   await checkoutPage.fillBillingAddress(
     'Test street 98',
@@ -46,7 +40,7 @@ test('Verify successful checkout with logged in user', async ({ loggedInPage, pr
 
   await checkoutPage.selectCreditCardPayment(
     '1111-1111-1111-1111',
-    formattedExpiry,
+    expiryDate,
     '111',
     'Test Name',
   );

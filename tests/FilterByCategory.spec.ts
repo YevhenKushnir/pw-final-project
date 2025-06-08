@@ -4,7 +4,7 @@ import { POWER_TOOLS } from '../pages/category_enum';
 test('Verify user can filter products by category', async ({ homePage, page }) => {
     await homePage.homePageNavigate();
     const responsePromise = page.waitForResponse((response) => 
-        response.url().includes('/products?between=price,1,100&by_category=') && response.status() === 200
+        response.url().includes('/products?page=0&between=price,1,100&by_category=') && response.status() === 200
     );
     await homePage.filtration.selectSander();
     await responsePromise;

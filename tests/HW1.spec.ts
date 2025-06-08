@@ -17,7 +17,7 @@ test('2: Verify user can view product details', async ({ page, homePage, product
 
   await homePage.homePageNavigate();
   await homePage.openProduct('Combination Pliers');
-  expect(page.url()).toContain('/product');
+  await expect(page).toHaveURL(/\/product/);
   await expect(productPage.productName).toHaveText('Combination Pliers', { timeout: 5000 });
   await expect(productPage.productPrice).toContainText('14.15');
   await expect(productPage.addToCartButton).toBeVisible();
@@ -31,7 +31,7 @@ test('3: Verify user can add product to cart', async ({ page, homePage, productP
 
   await homePage.homePageNavigate();
   await homePage.openProduct(productName);
-  expect(page.url()).toContain('/product');
+  await expect(page).toHaveURL(/\/product/);
   await expect(productPage.productName).toHaveText(productName);
   await expect(productPage.productPrice).toHaveText(productPrice);
 
