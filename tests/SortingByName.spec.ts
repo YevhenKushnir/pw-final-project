@@ -1,9 +1,6 @@
-import { test, expect } from '@playwright/test';
-import { ProductsFiltersFragment } from '../fragments/ProductFilterFragments';
-import { HomePage } from '../pages/home.page';
+import {expect, test} from '../fixtures/fixtures';
 
-test('Verify sorting by Name (A - Z)', async ({ page }) => {
-  const homePage = new HomePage(page);
+test('Verify sorting by Name (A - Z)', async ({ homePage }) => {
   await homePage.homePageNavigate();
   await homePage.filtration.selectSortingOption('Name (A - Z)');
   const productNames = await homePage.getAllProductNames();
@@ -17,8 +14,7 @@ test('Verify sorting by Name (A - Z)', async ({ page }) => {
   expect(sortedCorrectly).toBe(true);
 });
 
-test('Verify sorting by Name (Z - A)', async ({ page }) => {
-  const homePage = new HomePage(page);
+test('Verify sorting by Name (Z - A)', async ({ homePage }) => {
   await homePage.homePageNavigate();
   await homePage.filtration.selectSortingOption('Name (Z - A)');
   const productNames = await homePage.getAllProductNames();

@@ -1,9 +1,6 @@
-import { test, expect } from '@playwright/test';
-import { ProductsFiltersFragment } from '../fragments/ProductFilterFragments';
-import { HomePage } from '../pages/home.page';
+import {expect, test} from '../fixtures/fixtures';
 
-test('Verify sorting by Price (Low - High)', async ({ page }) => {
-  const homePage = new HomePage(page);
+test('Verify sorting by Price (Low - High)', async ({ homePage }) => {
   await homePage.homePageNavigate();
   await homePage.filtration.selectSortingOption('Price (Low - High)');
   const productPrices = await homePage.getAllProductPrices();
@@ -19,8 +16,7 @@ test('Verify sorting by Price (Low - High)', async ({ page }) => {
   expect(isSorted).toBe(true);
 });
 
-test('Verify sorting by Price (High - Low)', async ({ page }) => {
-  const homePage = new HomePage(page);
+test('Verify sorting by Price (High - Low)', async ({ homePage }) => {
   await homePage.homePageNavigate();
   await homePage.filtration.selectSortingOption('Price (High - Low)');
   const productPrices = await homePage.getAllProductPrices();
